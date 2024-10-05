@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 
-export default function Input() {
+export default function Input({ onSubmit }: {onSubmit: (input: string) => void}) {
     const [input, setInput] = useState("");
 
     function handleSubmit() {
+        onSubmit(input);
         setInput("");
     }
 
@@ -17,7 +18,7 @@ export default function Input() {
 
     function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
         setInput(event.target.value);
-      };
+    };
 
     return <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} className="border-black border-solid border-2"/>
 }

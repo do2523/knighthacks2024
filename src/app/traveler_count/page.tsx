@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import Input from "../_components/input";
+import RedirectInput from "../_components/redirect_input";
 
 export default function TravelerCount() {
     const [option, setOption] = useState("");
@@ -16,7 +16,7 @@ export default function TravelerCount() {
                     
                     
                 </div>
-                {option == "accompanied" && <Input />}
+                {option == "accompanied" && <RedirectInput href="budget" />}
             </div>
         </div>
     )
