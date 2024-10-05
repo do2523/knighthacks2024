@@ -1,7 +1,7 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { geminiRouter } from "./routers/gemini";
-// import { flightRouter } from "./routers/flight";
+import { flightRouter } from "./routers/flight";
 
 /**
  * This is the primary router for your server.
@@ -11,7 +11,7 @@ import { geminiRouter } from "./routers/gemini";
 export const appRouter = createTRPCRouter({
   post: postRouter,
   gemini: geminiRouter,
-  // flight: flightRouter,
+  flight: flightRouter,
 });
 
 // export type definition of API
