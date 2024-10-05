@@ -9,10 +9,20 @@ export default function Questionary() {
             <div className={styles.question}>
                 What kind of person are you?
             </div>
-            <Suspense><RedirectButton href="traveler_count">Introvert</RedirectButton></Suspense>
-            <Suspense><RedirectButton href="traveler_count">Extrovert</RedirectButton></Suspense>
-            <Suspense><RedirectButton href="traveler_count">Ambivert</RedirectButton></Suspense>
-            <Suspense><RedirectButton href="traveler_count">Business</RedirectButton></Suspense>
+            <div className="flex flex-row space-x-20 mt-8 h-20">
+                <div>
+                    <Suspense><RedirectButton href="traveler_count">Adventure Seeker</RedirectButton></Suspense>
+                </div>
+                <div>
+                    <Suspense><RedirectButton href="traveler_count">Relaxation Enthusiast</RedirectButton></Suspense>
+                </div>
+                <div>
+                    <Suspense><RedirectButton href="traveler_count">Culture Enjoyer</RedirectButton></Suspense>
+                </div>
+                <div>
+                    <Suspense><RedirectButton href="traveler_count">The Foodie</RedirectButton></Suspense>
+                </div>
+            </div>
         </div>
     )
 }
