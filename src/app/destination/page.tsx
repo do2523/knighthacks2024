@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import RedirectInput from "../_components/redirect_input";
 import styles from '../../styles/Shared.module.css';
 
@@ -10,7 +11,7 @@ export default function Destination() {
                     <div className="text-center text-[#334155]">
                         Where are you traveling to?
                         <div className={styles['input-box']}>
-                            <RedirectInput href="duration" />
+                            <Suspense><RedirectInput href="duration" /></Suspense>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import RedirectInput from "../_components/redirect_input";
+import RedirectButton from "../_components/redirect_button";
 
 export default function TravelerCount() {
     const [option, setOption] = useState("");
@@ -11,12 +12,12 @@ export default function TravelerCount() {
             <div className="flex flex-col gap-2 items-center justify-center h-screen w-screen">
                 <div className="flex flex-row gap-2 items-center justify-center">
                     Solo or accompanied?
-                    <button className="border-2 border-black p-2 rounded-lg" onClick={() => setOption("solo")}>Solo</button>
+                    <Suspense><RedirectButton href="budget">Solo</RedirectButton></Suspense>
                     <button className="border-2 border-black p-2 rounded-lg" onClick={() => setOption("accompanied")}>Accompanied</button>
                     
                     
                 </div>
-                {option == "accompanied" && <RedirectInput href="budget" />}
+                {option == "accompanied" && <Suspense><RedirectInput href="budget" /></Suspense>}
             </div>
         </div>
     )
