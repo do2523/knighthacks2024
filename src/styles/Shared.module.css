@@ -35,10 +35,9 @@
   text-align: center;
   color: #334155;
   font-weight: 600;
+  font-size: px;
 }
 
-
-/* For smaller screen sizes - image on top */
 @media (max-width: 768px) {
   .responsive-container {
     flex-direction: column;
