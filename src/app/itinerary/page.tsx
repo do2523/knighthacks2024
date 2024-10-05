@@ -19,7 +19,7 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
         "The user's destination is " + destination +
         "The user will stay there for " + duration +
         "The user is " + questionary +
-        (traveler_count == "solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
+        (traveler_count == "Solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
         "The user's budget is " + budget;
 
     const { data, isSuccess } = api.gemini.prompt.useQuery({ prompt });
