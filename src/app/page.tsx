@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { getServerAuthSession } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
+import FlightDestinationsPage from "./_components/flight";
 
 export default async function Home() {
   const session = await getServerAuthSession();
@@ -41,6 +42,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
+        <FlightDestinationsPage />
       </main>
     </HydrateClient>
   );
