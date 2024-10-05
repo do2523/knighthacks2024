@@ -1,17 +1,24 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function Questionary() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const pathName = usePathname().slice(1);
 
     function handleButton(e: React.MouseEvent<HTMLButtonElement>) {
         const button = e.target as HTMLElement;
 
-        const queryParamString = new URLSearchParams([[pathName, button.innerText]]).toString();
-        router.push(`/traveler_count?${queryParamString}`);
+        const queryParamString = new URLSearchParams();
+        searchParams.forEach((name, value) => {
+            queryParamString.append(value, name);
+        })
+
+        queryParamString.append(pathName, button.innerText);
+
+        router.push(`/traveler_count?${queryParamString.toString()}`);
     }
 
     return(
