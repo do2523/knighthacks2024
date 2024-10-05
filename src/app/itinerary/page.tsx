@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react";
 import { api } from "~/trpc/react";
-import ResponseContainer from "../_components/response_container";
 import { JsonToTable } from "react-json-to-table";
 
 export default function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
@@ -21,7 +19,7 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
         (traveler_count == "solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
         "The user's budget is " + budget;
 
-    const { isSuccess, data, isLoading} = api.gemini.prompt.useQuery({ prompt });
+    const { data } = api.gemini.prompt.useQuery({ prompt });
 
     if(!data) return;
 
