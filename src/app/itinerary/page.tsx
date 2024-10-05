@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import ResponseContainer from "../_components/response_container";
+import { JsonToTable } from "react-json-to-table";
 
 export default function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
     const destination = searchParams.destination ?? "none";
@@ -22,6 +23,8 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
 
     const { isSuccess, data, isLoading} = api.gemini.prompt.useQuery({ prompt });
 
+    if(!data) return;
+
     return(
         <div>
             {destination}
@@ -30,7 +33,8 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
             {traveler_count}
             {budget}
             <br />
-            { data }
+            <JsonToTable json={JSON.parse(data?.slice(8, data.length - 3)) as unknown}/>
+            {data?.slice(8, data.length - 3)}
         </div>
     )
 }

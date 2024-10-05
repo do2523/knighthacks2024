@@ -12,6 +12,7 @@ export default function RedirectInput({ href }: { href: string }) {
         <div>
             <Input onSubmit={(input) => {
                 const queryParamString = new URLSearchParams();
+            
                 searchParams.forEach((name, value) => {
                     queryParamString.append(value, name);
                 })

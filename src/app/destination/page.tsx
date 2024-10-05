@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import RedirectInput from "../_components/redirect_input";
 
 export default function Destination() {
@@ -7,7 +8,7 @@ export default function Destination() {
             <div className="flex flex-col gap-2 items-center justify-center h-screen w-screen text-4xl font-semibold">
                 Where are you traveling to?
                 <div className="mt-8">
-                    <RedirectInput href="duration" />
+                    <Suspense><RedirectInput href="duration" /></Suspense>
                 </div>
             </div>
         </div>
