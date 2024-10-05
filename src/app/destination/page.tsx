@@ -5,7 +5,7 @@ import styles from '../../styles/Shared.module.css';
 export default function Destination() {
     return (
         <div className="relative min-h-screen w-screen flex items-center justify-center bg-[#F0F9FF]">
-            <div className="flex flex-col items-center justify-center h-screen w-screen text-4xl font-semibold">
+            <div className="flex flex-col items-center justify-center h-screen w-screen">
                 <div className={styles['responsive-container']}>
                     <p className={styles['responsive-image']}>HI</p>
                     <div className={styles.question}>
