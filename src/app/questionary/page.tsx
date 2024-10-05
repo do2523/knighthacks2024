@@ -6,7 +6,7 @@ import styles from '../../styles/Shared.module.css';
 export default function Questionary() {
     return(
         <div className="flex min-h-screen flex-col items-center justify-center">
-            <div className={styles['question']}>
+            <div className={styles.question}>
                 What kind of person are you?
             </div>
             <Suspense><RedirectButton href="traveler_count">Introvert</RedirectButton></Suspense>

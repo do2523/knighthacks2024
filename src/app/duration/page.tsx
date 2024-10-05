@@ -8,7 +8,7 @@ export default function Duration() {
             <div className="flex flex-col items-center justify-center h-screen w-screen text-4xl font-semibold">
                 <div className={styles['responsive-container']}>
                     <p className={styles['responsive-image']}>HI</p>
-                    <div className={styles['question']}>
+                    <div className={styles.question}>
                         How long is your stay?
                         <div className={styles['input-box']}>
                             <Suspense><RedirectInput href="questionary" /></Suspense>

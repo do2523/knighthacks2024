@@ -8,7 +8,7 @@ export default function Destination() {
             <div className="flex flex-col items-center justify-center h-screen w-screen text-4xl font-semibold">
                 <div className={styles['responsive-container']}>
                     <p className={styles['responsive-image']}>HI</p>
-                    <div className={styles['question']}>
+                    <div className={styles.question}>
                         Where are you traveling to?
                         <div className={styles['input-box']}>
                             <Suspense><RedirectInput href="duration" /></Suspense>
