@@ -18,7 +18,7 @@ export default async function Home() {
           <div className="flex grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8 items-center justify-center m-auto">
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="./input"
+              href="./destination"
             >
               <h3 className="text-2xl font-bold">Enter →</h3>
               <div className="text-lg">
