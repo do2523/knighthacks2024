@@ -21,6 +21,6 @@ export default function RedirectButton({ children, href }: Readonly<{ children: 
     }
 
     return(
-        <button className="border-2 border-black p-2 rounded-lg" onClick={handleButton}>{children}</button>
+        <button className="shadow-xl rounded-3xl h-[200px] w-[250px] text-2xl p-10 font-semibold" onClick={handleButton}>{children}</button>
     )
 }
