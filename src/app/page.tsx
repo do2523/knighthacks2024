@@ -19,7 +19,7 @@ export default async function Home() {
             {session ? "Sign out" : "Sign in"}
           </Link>
           <Link
-            href={session ? "/api/auth/signout" : "/api/auth/signin"}
+            href="/more"
             className="flex flex-col items-center justify-center rounded-md bg-[#334155] text-white ml-3 px-4 py-2 font-semibold no-underline transition hover:bg-gray-800 focus:outline-none text-lg"
           >
             <span className="block w-2 h-2 bg-white rounded-full mb-1"></span>
