@@ -2,7 +2,21 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function RedirectButton({ children, href }: Readonly<{ children: React.ReactNode, href: string }>) {
+const colors = {
+    white: "bg-white hover:bg-slate-100 text-slate-700",
+    green: "bg-green-200 hover:bg-green-300 text-slate-700",
+    cyan:  "bg-cyan-200  hover:bg-cyan-300  text-slate-700",
+    stone: "bg-stone-200 hover:bg-stone-300 text-slate-700",
+    amber: "bg-amber-200 hover:bg-amber-300 text-slate-700",  
+}
+
+interface RedirectButtonProps {
+    color?: "white" | "green" | "cyan" | "stone" | "amber";
+    children: React.ReactNode;
+    href: string
+}
+
+export default function RedirectButton({ color = "white", children, href }: RedirectButtonProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathName = usePathname().slice(1);
@@ -21,6 +35,7 @@ export default function RedirectButton({ children, href }: Readonly<{ children: 
     }
 
     return(
-        <button className="border-2 border-black p-2 rounded-lg" onClick={handleButton}>{children}</button>
+        <button className= {`rounded-[2rem] h-full w-full ${colors[color]} shadow-lg text-3xl font-bold`} onClick={handleButton}>{children}</button>
     )
 }
+

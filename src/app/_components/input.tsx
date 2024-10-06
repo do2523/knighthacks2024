@@ -20,5 +20,5 @@ export default function Input({ onSubmit }: {onSubmit: (input: string) => void})
         setInput(event.target.value);
     };
 
-    return <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} className="border-black border-solid border-2"/>
+    return <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} className=""/>
 }
