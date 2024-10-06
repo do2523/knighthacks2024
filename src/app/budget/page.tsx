@@ -9,7 +9,7 @@ export default function Budget() {
                 <div className={styles['responsive-container']}>
                     <p className={styles['responsive-image']}>HI</p>
                     <div className={styles.question}>
-                        What's your trip budget?
+                        {"What's your trip budget?"}
                         <div className={styles['input-box']}>
                             <Suspense><RedirectInput href="./itinerary" /></Suspense>
                         </div>
