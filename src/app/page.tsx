@@ -31,7 +31,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="text-center text-lg sm:text-xl md:text-2xl lg:text:3xl max-w-lg mx-auto mb-8">
-                Answer some questions and we'll generate a custom itinerary for you.
+                {`Answer some questions and we'll generate a custom itinerary for you.`}
               </div>
               <div className="flex flex-col items-center justify-center gap-4">
 
