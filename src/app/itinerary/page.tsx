@@ -5,6 +5,9 @@ import { getServerAuthSession } from "~/server/auth";
 import Link from "next/link";
 import { Suspense } from "react";
 
+export const revalidate = 0;
+export const maxDuration = 60; 
+
 export default async function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
     const destination = searchParams.destination ?? "none";
     const duration = searchParams.duration ?? "none";
