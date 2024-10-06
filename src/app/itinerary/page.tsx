@@ -74,9 +74,17 @@ function CallGeminiGenerateTableFallback() {
 async function CallGeminiGenerateTable({ prompt }: {prompt: string}) {
     const data = await api.gemini.prompt({prompt: prompt});
 
-    return(
-        <div>
-        <Table json={JSON.parse(data.slice(8, data.length - 3)) as data[]} />
-        </div>
-    )
+    try {
+        const json = JSON.parse(data.slice(8, data.length - 3)) as data[];
+
+        return(
+            <div>
+            <Table json={json} />
+            </div>
+        )
+    } catch {
+        return(
+            <CallGeminiGenerateTable prompt={prompt} />
+        )
+    }
 }
