@@ -34,15 +34,15 @@ export default function Table(json: {json: data[]}) {
                                     <table className="w-full box-border border-collapse border-black">
                                         <tbody>
                                             <tr className="border-solid p-[5px] box-border border-black min-w-[100px] full-w text-center">
-                                                <th className="text-left border-solid p-[5px] box-border border-black w-[100px]">time</th>
-                                                <th className="text-left border-solid p-[5px] box-border border-black w-[100px]">name</th>
+                                                <th className="text-left border-solid p-[5px] box-border border-black w-[80px]">time</th>
+                                                <th className="text-left border-solid p-[5px] box-border border-black w-[200px]">name</th>
                                                 <th className="text-left border-solid p-[5px] box-border border-black w-[100px]">cost</th>
                                                 <th className="text-left border-solid p-[5px] box-border border-black">description</th>
                                             </tr>
                                             <tr className="border-solid p-[5px] box-border border-black text-center">
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.time}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.name}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.cost}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[80px] break-words">{item.time}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[200px] break-words">{item.name}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[100px] break-words">{item.cost}</td>
                                                 <td className="text-left border-solid p-[5px] box-border border-black text-sm break-words">{item.description}</td>
                                             </tr>
                                         </tbody>
