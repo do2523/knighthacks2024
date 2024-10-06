@@ -1,10 +1,7 @@
 import { api } from '~/trpc/server';
 
-type FlightData = [string, string, string, string, { total: string }][];
-
 const FlightOriginsList = async () => {
-  const flights = await api.flight.getFlights() as FlightData;
-  console.log(flights); // Check the actual structure in the console
+  const flights = await api.flight.getFlights();
 
   return (
     <div className="bg-white min-h-screen">
@@ -12,16 +9,15 @@ const FlightOriginsList = async () => {
         <h1 className="text-3xl font-bold mb-6 text-center text-black">Flight Origins</h1>
         <ul className="space-y-4">
           {flights?.length > 0 ? (
-            flights.map((flight, index) => {
-              const [identifier, destination, startDate, endDate, details] = flight;
+            flights.map((flight) => {
 
               return (
-                <li key={index} className="mb-4 p-6 bg-white rounded-lg shadow-md border border-gray-200 max-w-4xl mx-auto">
-                  <p className="text-lg text-gray-800"><strong>Identifier:</strong> {identifier}</p>
-                  <p className="text-lg text-gray-800"><strong>Destination:</strong> {destination}</p>
-                  <p className="text-lg text-gray-800"><strong>Start Date:</strong> {startDate}</p>
-                  <p className="text-lg text-gray-800"><strong>End Date:</strong> {endDate}</p>
-                  <p className="text-lg text-gray-800"><strong>Price:</strong> ${details.total}</p>
+                <li key={flight.destination + flight.departureDate + flight.returnDate} className="mb-4 p-6 bg-white rounded-lg shadow-md border border-gray-200 max-w-4xl mx-auto">
+                  <p className="text-lg text-gray-800"><strong>Identifier:</strong> {flight.type}</p>
+                  <p className="text-lg text-gray-800"><strong>Destination:</strong> {flight.destination}</p>
+                  <p className="text-lg text-gray-800"><strong>Start Date:</strong> {flight.departureDate}</p>
+                  <p className="text-lg text-gray-800"><strong>End Date:</strong> {flight.returnDate}</p>
+                  <p className="text-lg text-gray-800"><strong>Price:</strong> ${flight.price.total}</p>
                 </li>
               );
             })
