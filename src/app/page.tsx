@@ -18,6 +18,14 @@ export default async function Home() {
           >
             {session ? "Sign out" : "Sign in"}
           </Link>
+          <Link
+            href={session ? "/api/auth/signout" : "/api/auth/signin"}
+            className="flex flex-col items-center justify-center rounded-md bg-[#334155] text-white ml-3 px-4 py-2 font-semibold no-underline transition hover:bg-gray-800 focus:outline-none text-lg"
+          >
+            <span className="block w-2 h-2 bg-white rounded-full mb-1"></span>
+            <span className="block w-2 h-2 bg-white rounded-full mb-1"></span>
+            <span className="block w-2 h-2 bg-white rounded-full"></span>
+          </Link>
         </div>
 
         <div className="flex min-h-screen flex-col items-center justify-center bg-sky-50 text-[#334155]">
