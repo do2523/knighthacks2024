@@ -12,7 +12,7 @@ export interface data {
 
 export default function Table({ json }: { json: data[] }) {
   return (
-    <div className="max-w-[90rem] mx-auto bg-white rounded-lg shadow-lg p-0">
+    <div className="max-w-[80rem] mx-auto bg-white rounded-lg shadow-lg p-0">
       {json.map((items) => (
         <Fragment key={items.day}>
           <div className="bg-[#334155] rounded-md py-4 px-4 mb-4">

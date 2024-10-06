@@ -41,10 +41,10 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
         <div className="bg-[#F0F9FF] pt-10">
             <div className="flex flex-row justify-between">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold ml-10">Your Itiner<span className="text-cyan-500">AI</span>ry to {capFirst(destination)}</h1>
-                <div className="mb-10 text-2xl flex justify-end mr-10">
+                <div className="mb-10 text-xl flex justify-end mr-10">
                     <Link
                     href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                    className="rounded-md bg-[#334155] px-10 py-4 font-semibold no-underline transition hover:bg-[#1b2534] text-white"
+                    className="rounded-md bg-[#334155] px-6 py-3 font-semibold no-underline transition hover:bg-[#1b2534] text-white"
                     >
                     {session ? "Sign out" : "Sign in"}
                     </Link>
