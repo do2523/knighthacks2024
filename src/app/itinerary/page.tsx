@@ -1,10 +1,8 @@
-"use client"
-
-import { api } from "~/trpc/react";
+import { api } from "~/trpc/server";
 import type { data } from "../_components/json_to_table";
 import Table from "../_components/json_to_table";
 
-export default function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
+export default async function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
     const destination = searchParams.destination ?? "none";
     const duration = searchParams.duration ?? "none";
     const questionary = searchParams.questionary ?? "none";
@@ -24,7 +22,7 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
         (traveler_count == "Solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
         "The user's budget is " + budget;
 
-    const { data, isSuccess } = api.gemini.prompt.useQuery({ prompt });
+    const data = await api.gemini.prompt({ prompt: prompt });
 
     return(
         <div>
@@ -35,7 +33,7 @@ export default function Itinerary({ searchParams }: { searchParams: Record<strin
             budget: {budget}
             <br />
             <div>
-            {isSuccess && <Table json={JSON.parse(data?.slice(8, data.length - 3)) as data[]} />}
+            {data != "" && <Table json={JSON.parse(data.slice(8, data.length - 3)) as data[]} />}
             </div>
         </div>
     )

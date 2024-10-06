@@ -29,7 +29,8 @@ export default function Table(json: {json: data[]}) {
                     
                         {items.activities.map(item => {
                             return(
-                                <tr key={item.name} className="border-solid p-[5px] box-border border-black">
+                                <div key={item.name}>
+                                <tr className="border-solid p-[5px] box-border border-black">
                                 <td className="border-solid p-[5px] box-border border-black">
                                     <table className="w-full box-border border-collapse border-black">
                                         <tbody>
@@ -49,6 +50,7 @@ export default function Table(json: {json: data[]}) {
                                     </table>
                                 </td>
                                 </tr>
+                                </div>
                             )
                         })}
                     </tr>
