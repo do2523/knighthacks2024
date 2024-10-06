@@ -24,7 +24,7 @@ export default function More() {
           Available Flights
         </Link>
         <Link
-          href="/hotel"
+          href="/offers"
           className="block text-3xl font-semibold text-white bg-cyan-500 hover:bg-cyan-600 px-8 py-5 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
         >
           Available Hotels
