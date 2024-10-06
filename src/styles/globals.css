@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+boby {
+    background-color: #F0F9FF;
+}
+
 td {
     text-align: center;
 }

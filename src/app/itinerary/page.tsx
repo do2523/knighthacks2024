@@ -20,7 +20,7 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
         "OUTPUT EVERY DAY IN THE DURATION. RESPONSES THAT DON'T OUTPUT EVERY DAY IN THEIR OWN JSON OBJECT WILL BE INVALID.\n" +
         "YOUR DESCRIPTION MUST NOT BE BROAD AND GENERAL AND MUST BE DECLARATIVE STATEMENTS STARTING WITH DECLARATIVE VERBS. YOUR DESCRIPTION MUST NOT USE SECOND PERSON OR IT WILL BE INVALID.\n" +
         "YOU MUST RESPOND IN JSON SYNTAX. RESPONSES THAT ARE NOT A JSON CODEBLOCK WILL BE INVALID.\n" +
-        "IF THE USER HAS A GOAL TAILOR THE REPONSE SO THAT THE GOAL IS ACCOMPLISHED BY THE TIME BEFORE DEPARTURE\n" +
+        "IF THE USER HAS A GOAL TAILOR THE RESPONSE SO THAT THE GOAL IS ACCOMPLISHED BY THE TIME BEFORE DEPARTURE\n" +
         "YOUR RESPONSE MUST HAVE THE FORMAT OF [{day: \"day [day num]\" [activities: {time: time, name: name, cost, cost, description, description}]}].\n" +
         "The current prompt is: " + 
         "The user's destination is " + destination +
@@ -29,22 +29,29 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
         (traveler_count == "Solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
         "The user's budget is " + budget;
 
+        function capFirst(string: string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
 
     return(
-        <div>
-            <div className="mb-10 mt-10 text-2xl flex justify-end mr-20 w-full">
-                <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-md bg-[#334155] px-10 py-4 font-semibold no-underline transition hover:bg-[#1b2534] text-white"
-                >
-                {session ? "Sign out" : "Sign in"}
-                </Link>
+        <div className="bg-[#F0F9FF] pt-10">
+            <div className="flex flex-row justify-between">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold ml-10">Your Itiner<span className="text-cyan-500">AI</span>ry to {capFirst(destination)}</h1>
+                <div className="mb-10 text-2xl flex justify-end mr-10">
+                    <Link
+                    href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                    className="rounded-md bg-[#334155] px-10 py-4 font-semibold no-underline transition hover:bg-[#1b2534] text-white"
+                    >
+                    {session ? "Sign out" : "Sign in"}
+                    </Link>
+                </div>
             </div>
-            destination: {destination} <br />
+            {/* destination: {destination} <br />
             duration: {duration} <br />
             questionary: {questionary} <br />
             traveler count: {traveler_count} <br />
-            budget: {budget}
+            budget: {budget} */}
             <br />
             <Suspense>
                 <CallGeminiGenerateTable prompt={prompt} />

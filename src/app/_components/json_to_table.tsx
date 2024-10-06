@@ -12,15 +12,13 @@ export interface data {
 
 export default function Table({ json }: { json: data[] }) {
   return (
-    <div className="max-w-3xl mx-auto bg-gray-100 p-4 rounded-lg shadow-lg">
+    <div className="max-w-[90rem] mx-auto bg-white rounded-lg shadow-lg p-0">
       {json.map((items) => (
         <Fragment key={items.day}>
-          {/* Day Heading Section */}
-          <div className="bg-blue-100 rounded-t-lg py-2 px-4 mb-4">
-            <h2 className="text-lg font-semibold text-gray-700">{items.day}</h2>
+          <div className="bg-[#334155] rounded-md py-4 px-4 mb-4">
+            <h2 className="text-2xl font-semibold text-white">{items.day.toUpperCase()}</h2>
           </div>
-          {/* Activities for the day */}
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse text-xl">
             <tbody>
               {items.activities.map((item) => (
                 <tr key={item.description} className="border-b border-gray-300">
@@ -40,8 +38,7 @@ export default function Table({ json }: { json: data[] }) {
               ))}
             </tbody>
           </table>
-          {/* Add bottom margin between days */}
-          <div className="mb-8"></div>
+          <div className="mb-3"></div>
         </Fragment>
       ))}
     </div>
