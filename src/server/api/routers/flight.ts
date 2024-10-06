@@ -1,5 +1,34 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-console.log("!!!!!!!!!!!************8")
+
+interface AccessToken {
+  type: string,
+  username: string,
+  application_name: string,
+  client_id: string,
+  token_type: string,
+  access_token: string,
+  expires_in: string,
+  state: string,
+  scope: string,
+}
+
+interface FlightData {
+  data: {
+    type: string,
+    origin: string,
+    destination: string,
+    departureDate: string,
+    returnDate: string,
+    price: {
+      total: string,
+    },
+    links: {
+      flightDates: string,
+      flightOffers: string,
+    }
+  }[]
+}
+
 // import fetch from "node-fetch"; // or native fetch if in an environment supporting it
 // First step: Get the Access Token
 async function getAccessToken() {
@@ -22,18 +51,13 @@ async function getAccessToken() {
     body: params
   };
 
-  try {
     const response = await fetch(url, options);
-    const data = await response.json();
-    if (data.access_token) {
-      return data.access_token;
-    } else {
-      throw new Error('Failed to retrieve access token');
-    }
-  } catch (error) {
-    console.log('err?')
-    throw new Error(`Error fetching access token:`);
-  }
+    if(!response) throw new Error(`Error fetching access token:`);
+
+    const data = await response.json() as AccessToken;
+    if (!data.access_token) throw new Error('Failed to retrieve access token');
+
+    return data.access_token;
 }
 
 // Second step: Use the access token to get a list of flight destinations
@@ -48,43 +72,35 @@ async function getFlightDestinations(accessToken: string) {
     }
   };
 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    if (data.data) {
-      return data.data; // Return the flight destinations
-    } else {
-      throw new Error('Failed to retrieve flight destinations');
-    }
-  } catch (error) {
-    throw new Error(`Error fetching flight destinations: `);
-  }
+  const response = await fetch(url, options);
+  if(!response) throw new Error(`Error fetching flight destinations: `);
+
+  const data = await response.json() as FlightData;
+  if(!data.data) throw new Error('Failed to retrieve flight destinations');
+
+  return data.data; // Return the flight destinations
 }
+
 // test
 // Main function for fetching flight destinations
 async function fetchFlightDestinations() {
   const accessToken = await getAccessToken();
-  if (accessToken) {
-    const flightDestinations = await getFlightDestinations(accessToken);
-    const origins = flightDestinations.map((flight: any) => [flight.type, flight.origin, flight.departureDate, flight.returnDate, flight.price]);
-    // console.log(origins)
-    return origins;
-  } else {
-    throw new Error('Could not retrieve access token');
-  }
+  if (!accessToken)  throw new Error('Could not retrieve access token');
+
+  const flightDestinations = await getFlightDestinations(accessToken);
+  const origins = flightDestinations.map((flight) => [flight.type, flight.origin, flight.departureDate, flight.returnDate, flight.price]);
+  
+  return origins;
 }
-fetchFlightDestinations();
 
 // Create tRPC router
 export const flightRouter = createTRPCRouter({
   getFlights: publicProcedure.query(async () => {
     // Fetch and return flight destinations
-    try {
-      const flightData = await fetchFlightDestinations();
-      console.log('yay');
-      return flightData;
-    } catch (error) {
-      throw new Error('LOL');
-    }
+
+    const flightData = await fetchFlightDestinations();
+    if(!flightData) new Error('Failed to fetch flight destinations');
+    
+    return flightData;
   }),
 });
