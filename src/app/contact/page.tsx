@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState, useRef } from "react";
 
 export default function ContactForm() {
-  const formRef = useRef<HTMLFormElement | null>(null); // Create a ref to target the form element
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const [submissionStatus, setSubmissionStatus] = useState<{
     success: boolean | null;
@@ -16,8 +16,9 @@ export default function ContactForm() {
 
     setSubmissionStatus({ success: null, message: "" });
 
-    // Use formRef.current to get the form element and reset it later
-    const formData = new FormData(formRef.current!);
+    const formData = formRef.current ? new FormData(formRef.current) : null;
+    if (!formData) return;
+
     formData.append("access_key", "bedb4d5a-a2f1-4512-87d3-d3d5ce2bf431");
 
     const object = Object.fromEntries(formData.entries());
@@ -46,7 +47,6 @@ export default function ContactForm() {
     } catch (error) {
       setSubmissionStatus({ success: false, message: "Form submission failed. Please try again." });
     } finally {
-      // Reset form fields using ref
       if (formRef.current) {
         formRef.current.reset();
       }
@@ -58,7 +58,7 @@ export default function ContactForm() {
       <div className="bg-white rounded-3xl text-white shadow-lg p-8 max-w-lg w-full border border-cyan-500">
         <h2 className="text-3xl font-bold mb-4 text-center text-black">Contact us</h2>
         <p className="text-center mb-6 text-black">We would love to make your experience better!</p>
-        <form ref={formRef} onSubmit={handleSubmit}> {/* Add ref to the form */}
+        <form ref={formRef} onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block font-medium mb-2 text-black">Name</label>
             <input
@@ -128,17 +128,15 @@ export default function ContactForm() {
           </div>
         )}
       </div>
-      <div className="mt-8 text-center">
-      <Link
-          href="/"
-          className="block font-semibold text-white bg-cyan-500 hover:bg-cyan-600 px-6 py-2 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-        >
-            Homepage
-      </Link>
-        
-        <button className="mt-4 bg-cyan-500 font-semibold text-white px-6 py-2 rounded-lg shadow-lg hover:bg-cyan-600 transition duration-300 ease-in-out transform hover:scale-105">
-          <a target="_blank" href="https://linktr.ee/knighthacks">KnightHacks</a>
-        </button>
+
+      <div className="mt-8 text-center space-y-4">
+        <Link href="/" className="block font-semibold text-white bg-cyan-500 hover:bg-cyan-600 px-6 py-2 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+          Homepage
+        </Link>
+
+        <Link href="https://linktr.ee/knighthacks" target="_blank" className="block font-semibold text-white bg-cyan-500 hover:bg-cyan-600 px-6 py-2 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+          KnightHacks
+        </Link>
       </div>
     </div>
   );
