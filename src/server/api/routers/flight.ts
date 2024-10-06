@@ -66,8 +66,8 @@ async function fetchFlightDestinations() {
   const accessToken = await getAccessToken();
   if (accessToken) {
     const flightDestinations = await getFlightDestinations(accessToken);
-    const origins = flightDestinations.map((flight: any) => flight.origin);
-    console.log(origins)
+    const origins = flightDestinations.map((flight: any) => [flight.type, flight.origin, flight.departureDate, flight.returnDate, flight.price]);
+    // console.log(origins)
     return origins;
   } else {
     throw new Error('Could not retrieve access token');
