@@ -12,7 +12,7 @@ interface AccessToken {
   scope: string;
 }
 
-interface Hotel {
+export interface Hotel {
   chainCode: string;
   iataCode: string;
   dupeId: number;
@@ -25,6 +25,10 @@ interface Hotel {
   address: {
     countryCode: string;
   };
+  distance: {
+    value: number,
+    unit: string,
+  }
   lastUpdate: string;
 }
 
@@ -84,8 +88,9 @@ async function getHotelsInCity(accessToken: string) {
   const response = await fetch(url, options);
   if (!response.ok) throw new Error(`Error fetching hotels in Tokyo: ${response.statusText}`);
 
-  const data = (await response.json()) as HotelData;
-  if (!data.data) throw new Error("Failed to retrieve hotels");
+  
+  const data = await response.json() as HotelData;
+  if (!data) throw new Error("Failed to retrieve hotels");
 
   console.log("Fetched Hotel Data:", data.data);
 

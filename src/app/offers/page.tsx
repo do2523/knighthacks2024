@@ -1,8 +1,8 @@
 import { api } from '~/trpc/server';
 
-export const HotelList = async () => {
+export default async function HotelList() {
   // Fetch hotels using the tRPC API
-  const hotels = await api.offers.getHotels();
+  const hotels = await (api.offers.getHotels());
 
   return (
     <div className="bg-white min-h-screen">
@@ -36,5 +36,3 @@ export const HotelList = async () => {
     </div>
   );
 };
-
-export default HotelList;
