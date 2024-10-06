@@ -3,6 +3,14 @@
 import Link from "next/link";
 import React, { useState, useRef } from "react";
 
+interface SubmitType {
+  name: string,
+  email: string,
+  AnyRating: string,
+  message: string,
+  access_key: string,
+}
+
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -38,14 +46,17 @@ export default function ContactForm() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
-      if (result.success) {
+      const result = await response.json() as SubmitType;
+      console.log(JSON.stringify(object))
+
+      if (result) {
         setSubmissionStatus({ success: true, message: "Form submitted successfully!" });
       } else {
         setSubmissionStatus({ success: false, message: "Form submission failed. Please try again." });
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      setSubmissionStatus({ success: false, message: "Form submission failed. Please try again." });
+      setSubmissionStatus({ success: false, message: "Form submission failed. Please try again. Error: " });
     } finally {
       if (formRef.current) {
         formRef.current.reset();
@@ -105,7 +116,7 @@ export default function ContactForm() {
           </div>
           <div className="mb-4">
             <label className="inline-flex items-center">
-              <input type="checkbox" className="form-checkbox h-5 w-5 text-cyan-500 text-black" required />
+              <input type="checkbox" className="form-checkbox h-5 w-5 text-black" required />
               <span className="ml-2 text-black">I am not a robot</span>
             </label>
           </div>
