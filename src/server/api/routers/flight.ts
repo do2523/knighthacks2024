@@ -88,9 +88,8 @@ async function fetchFlightDestinations() {
   if (!accessToken)  throw new Error('Could not retrieve access token');
 
   const flightDestinations = await getFlightDestinations(accessToken);
-  const origins = flightDestinations.map((flight) => [flight.type, flight.origin, flight.departureDate, flight.returnDate, flight.price]);
   
-  return origins;
+  return flightDestinations;
 }
 
 // Create tRPC router
