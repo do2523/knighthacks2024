@@ -40,10 +40,10 @@ export default function Table(json: {json: data[]}) {
                                                 <th className="text-left border-solid p-[5px] box-border border-black">description</th>
                                             </tr>
                                             <tr className="border-solid p-[5px] box-border border-black text-center">
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px]">{item.time}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px]">{item.name}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px]">{item.cost}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm">{item.description}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.time}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.name}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm w-[100px] break-words">{item.cost}</td>
+                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm break-words">{item.description}</td>
                                             </tr>
                                         </tbody>
                                     </table>
