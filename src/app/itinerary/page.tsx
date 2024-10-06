@@ -1,6 +1,9 @@
 import { api } from "~/trpc/server";
 import type { data } from "../_components/json_to_table";
 import Table from "../_components/json_to_table";
+import { getServerAuthSession } from "~/server/auth";
+import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function Itinerary({ searchParams }: { searchParams: Record<string, string | undefined>; }) {
     const destination = searchParams.destination ?? "none";
@@ -8,6 +11,8 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
     const questionary = searchParams.questionary ?? "none";
     const traveler_count = searchParams.traveler_count ?? "none";
     const budget = searchParams.budget ?? "none";
+
+    const session = await getServerAuthSession();
 
     const prompt = "Your job is to create detailed itinerary using the JSON syntax for the user without asking any more questions.\n" +
         "YOU MUST TAKE INTO ACCOUNT ALL FACTORS SPECIALLY THE WANTS OF THE USER. FOR EXAMPLE IF THE USER HAS NO MONEY THEN DON'T ADD ANYTHING PAID.\n" +
@@ -24,18 +29,36 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
         (traveler_count == "Solo" ? "The user is traveling alone" : ("The user is being accompanied by " + traveler_count)) +
         "The user's budget is " + budget;
 
-    const data = await api.gemini.prompt({ prompt: prompt });
-    console.log(data);
 
     return(
         <div>
+            <div className="mb-10 mt-10 text-2xl flex justify-end mr-20 w-full">
+                <Link
+                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                className="rounded-md bg-[#334155] px-10 py-4 font-semibold no-underline transition hover:bg-[#1b2534] text-white"
+                >
+                {session ? "Sign out" : "Sign in"}
+                </Link>
+            </div>
             destination: {destination} <br />
             duration: {duration} <br />
             questionary: {questionary} <br />
             traveler count: {traveler_count} <br />
             budget: {budget}
             <br />
-            {data != "" && <Table json={JSON.parse(data.slice(8, data.length - 3)) as data[]} />}
+            <Suspense>
+                <CallGeminiGenerateTable prompt={prompt} />
+            </Suspense>
+        </div>
+    )
+}
+
+async function CallGeminiGenerateTable({ prompt }: {prompt: string}) {
+    const data = await api.gemini.prompt({prompt: prompt});
+
+    return(
+        <div>
+        <Table json={JSON.parse(data.slice(8, data.length - 3)) as data[]} />
         </div>
     )
 }
