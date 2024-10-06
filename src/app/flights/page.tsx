@@ -10,7 +10,6 @@ const FlightOriginsList = async () => {
         <ul className="space-y-4">
           {flights?.length > 0 ? (
             flights.map((flight) => {
-
               return (
                 <li key={flight.destination + flight.departureDate + flight.returnDate} className="mb-4 p-6 bg-white rounded-lg shadow-md border border-gray-200 max-w-4xl mx-auto">
                   <p className="text-lg text-gray-800"><strong>Identifier:</strong> {flight.type}</p>

@@ -56,9 +56,17 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
             traveler count: {traveler_count} <br />
             budget: {budget} */}
             <br />
-            <Suspense>
+            <Suspense fallback={<CallGeminiGenerateTableFallback />}>
                 <CallGeminiGenerateTable prompt={prompt} />
             </Suspense>
+        </div>
+    )
+}
+
+function CallGeminiGenerateTableFallback() {
+    return(
+        <div className="justify-center flex">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold ml-10">Load<span className="text-cyan-500">i</span>ng...</h1>
         </div>
     )
 }
