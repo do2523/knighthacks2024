@@ -10,55 +10,41 @@ export interface data {
     }[]
 }
 
-export default function Table(json: {json: data[]}) {
-    console.log(json);
-  return (
-    <div>
-      <table className="w-full box-border border-collapse border-black text-sm">
-        <tbody className="box-border border-solid border-black">
+
+export default function Table({ json }: { json: data[] }) {
+    return (
+      <div>
+        <table className="w-full box-border border-collapse border border-black text-sm">
+          <thead>
             <tr>
-            <td className="text-left border-solid p-[5px] box-border border-black">Day</td>
-            <td className="text-left border-solid p-[5px] box-border border-black">Activities</td>
+              <th className="text-left border p-2">Day</th>
+              <th className="text-left border p-2 min-w-[150px]">Time</th>
+              <th className="text-left border p-2">Name</th>
+              <th className="text-left border p-2 min-w-[100px]">Cost</th>
+              <th className="text-left border p-2">Description</th>
             </tr>
-            
-            {json.json.map((items) => {
-                return(
-                    <Fragment key={items.day}>
-                    <tr className="border-solid p-[5px] box-border border-black">
-                        <td className="text-left border-solid p-[5px] box-border border-black">{items.day}</td>
-                    
-                        {items.activities.map(item => {
-                            return(
-                                <div key={item.name}>
-                                <tr className="border-solid p-[5px] box-border border-black">
-                                <td className="border-solid p-[5px] box-border border-black">
-                                    <table className="w-full box-border border-collapse border-black">
-                                        <tbody>
-                                            <tr className="border-solid p-[5px] box-border border-black min-w-[100px] full-w text-center">
-                                                <th className="text-left border-solid p-[5px] box-border border-black w-[80px]">time</th>
-                                                <th className="text-left border-solid p-[5px] box-border border-black w-[200px]">name</th>
-                                                <th className="text-left border-solid p-[5px] box-border border-black w-[100px]">cost</th>
-                                                <th className="text-left border-solid p-[5px] box-border border-black">description</th>
-                                            </tr>
-                                            <tr className="border-solid p-[5px] box-border border-black text-center">
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[80px] break-words">{item.time}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[200px] break-words">{item.name}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm max-w-[100px] break-words">{item.cost}</td>
-                                                <td className="text-left border-solid p-[5px] box-border border-black text-sm break-words">{item.description}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                                </tr>
-                                </div>
-                            )
-                        })}
-                    </tr>
-                    </Fragment>
-                )
-            })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+          </thead>
+          <tbody>
+            {json.map((items) => (
+              <Fragment key={items.day}>
+                {items.activities.map((item, index) => (
+                  <tr key={item.description}>
+                    {/* Only display the day for the first activity of the day */}
+                    {index === 0 ? (
+                      <td rowSpan={items.activities.length} className="border p-2">
+                        {items.day}
+                      </td>
+                    ) : null}
+                    <td className="border p-2 text-left min-w-[150px]">{item.time}</td>
+                    <td className="border p-2 text-left">{item.name}</td>
+                    <td className="border p-2 text-left min-w-[100px]">{item.cost}</td>
+                    <td className="border p-2 text-left">{item.description}</td>
+                  </tr>
+                ))}
+              </Fragment>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }

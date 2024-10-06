@@ -12,8 +12,10 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
     const prompt = "Your job is to create detailed itinerary using the JSON syntax for the user without asking any more questions.\n" +
         "YOU MUST TAKE INTO ACCOUNT ALL FACTORS SPECIALLY THE WANTS OF THE USER. FOR EXAMPLE IF THE USER HAS NO MONEY THEN DON'T ADD ANYTHING PAID.\n" +
         "YOU MUST MAKE THE PLAN REALISTIC AND ATTAINABLE WITH THE DATA GIVEN. DON'T MAKE A REPETITIVE AND BORING ITINERARY UNLESS ASKED BY USER.\n" +
-        "OUTPUT EVERY DAY IN THE DURATION. RESPONSES THAT DON'T OUTPUT EVERY DAY IN THEIR OWN JSON OBJECT WILL BE INVALID" +
+        "OUTPUT EVERY DAY IN THE DURATION. RESPONSES THAT DON'T OUTPUT EVERY DAY IN THEIR OWN JSON OBJECT WILL BE INVALID.\n" +
+        "YOUR DESCRIPTION MUST NOT BE BROAD AND GENERAL AND MUST BE DECLARATIVE STATEMENTS STARTING WITH DECLARATIVE VERBS. YOUR DESCRIPTION MUST NOT USE SECOND PERSON OR IT WILL BE INVALID.\n" +
         "YOU MUST RESPOND IN JSON SYNTAX. RESPONSES THAT ARE NOT A JSON CODEBLOCK WILL BE INVALID.\n" +
+        "IF THE USER HAS A GOAL TAILOR THE REPONSE SO THAT THE GOAL IS ACCOMPLISHED BY THE TIME BEFORE DEPARTURE\n" +
         "YOUR RESPONSE MUST HAVE THE FORMAT OF [{day: \"day [day num]\" [activities: {time: time, name: name, cost, cost, description, description}]}].\n" +
         "The current prompt is: " + 
         "The user's destination is " + destination +
@@ -23,6 +25,7 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
         "The user's budget is " + budget;
 
     const data = await api.gemini.prompt({ prompt: prompt });
+    console.log(data);
 
     return(
         <div>
@@ -32,9 +35,7 @@ export default async function Itinerary({ searchParams }: { searchParams: Record
             traveler count: {traveler_count} <br />
             budget: {budget}
             <br />
-            <div>
             {data != "" && <Table json={JSON.parse(data.slice(8, data.length - 3)) as data[]} />}
-            </div>
         </div>
     )
 }
