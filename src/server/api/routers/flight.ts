@@ -102,4 +102,27 @@ export const flightRouter = createTRPCRouter({
     
     return flightData;
   }),
+
+  getRecommendedLocations: publicProcedure.query(async () => {
+    const accessToken = await getAccessToken();
+    if (!accessToken)  throw new Error('Could not retrieve access token');
+
+    const url = 'https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200';
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }
+    };
+
+    const response = await fetch(url, options);
+    if(!response) throw new Error(`Error fetching flight destinations: `);
+
+    const data = await response.json() as FlightData;
+    if(!data.data) throw new Error('Failed to retrieve flight destinations');
+
+    return data.data; // Return the flight destinations
+  })
 });
