@@ -7,7 +7,7 @@ export default function Destination() {
         <div className="relative min-h-screen w-screen flex items-center justify-center bg-[#F0F9FF]">
             <div className="flex flex-col items-center justify-center h-screen w-screen">
                 <div className={styles['responsive-container']}>
-                    <p className={styles['responsive-image']}>HI</p>
+                <img src="/plane.png" alt="description of image" className="mr-6" />
                     <div className={styles.question}>
                         Where are you traveling to?
                         <div className={styles['input-box']}>
